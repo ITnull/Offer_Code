@@ -101,10 +101,12 @@ void BinaryInsertSort(int a[], int len){
 				high = mid - 1;
 			}
 		}
-		//将mid往后元素全部后移一个位置
-		for (int i = len - 1; i > mid; i--){
-
+		//将low往后元素(包括low所指向的元素)全部后移一个位置
+		for (int j = i - 1; j >= low; j--)
+		{
+			a[j + 1] = a[j];
 		}
+		a[low] = key;
 	}
 }
 /*字符串替换:replaceSpace(char *str,int length)
@@ -259,7 +261,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	/**************BInsertSort(int a[], int len) 折半插入排序测试************/
 	int B[] = { 1, 10, 11, 21, 28, 37, 45, 57, 60, 72, 83, 90, 100, 143, 150 };
 	//求数组长度方法
-	BInsertSort(B, sizeof(B) / sizeof(int));
+	BinaryInsertSort(B, sizeof(B) / sizeof(int));
+	cout << "折半插入排序的结果：";
+	for (int i = 0; i < sizeof(B) / sizeof(int); i++){
+		cout << B[i] << " ";
+	}
+
+	cout << endl;
+	/*****************************************/
 
 	system("pause");
 	return 0;
