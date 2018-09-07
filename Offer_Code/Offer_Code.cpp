@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -176,6 +177,57 @@ void SelectionSort(int a[], int len){
 	}
 }
 
+/*
+	数据表记录包含表索引和数值，请对表索引相同的记录进行合并，即
+	将相同索引的数值进行求和运算，输出按照key值升序进行输出。
+
+	输入描述:
+	先输入键值对的个数
+	然后输入成对的index和value值，以空格隔开
+	输出描述:
+	输出合并后的键值对（多行）
+*/
+void IndexSameMerge(){
+	int n;
+	cout << "请输入键值对的个数：" << endl;
+	cin >> n;
+	map<int, int> m;
+	int key, value;
+	for (int i = 0; i < n; i++){
+		cin >> key >> value;
+		if (!m[key]){
+			m[key] = value;
+		}
+		else{
+			m[key] += value;
+		}
+	}
+	//将合并好的map输出
+	for (map<int, int>::iterator it = m.begin(); it != m.end(); it++){
+		cout << it->first << " " << it->second << endl;
+	}
+}
+
+/*
+	按照从右向左的阅读顺序，返回一个不含重复数字的新的整数
+	9876673
+	37689
+*/
+void OutNotRepeat(){
+	string str;
+	getline(cin, str);
+	int count = 0;
+	map<char, int>m;
+	for (int i = str.size() - 1; i >= 0; i--){
+		if (!m[str[i]]){
+			cout << str[i];
+			m[str[i]] = 1;
+		}
+		else{
+			continue;
+		}
+	}
+}
 
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -269,6 +321,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	cout << endl;
 	/*****************************************/
+	IndexSameMerge();
+
+	cout << endl;
+	/*********************************************/
+	OutNotRepeat();
 
 	system("pause");
 	return 0;
